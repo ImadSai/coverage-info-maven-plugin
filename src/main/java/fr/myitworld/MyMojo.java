@@ -34,19 +34,18 @@ import java.nio.file.Path;
  */
 @Mojo(name = "CoverageInfos", defaultPhase = LifecyclePhase.TEST)
 public class MyMojo extends AbstractMojo {
+
     // Logger
     Logger logger = LoggerFactory.getLogger(MyMojo.class);
 
     /**
      * XML document absolute path
      */
-    @Parameter(defaultValue = "")
+    @Parameter(defaultValue = "target/site/jacoco/jacoco.xml")
     private File coverageResult;
 
     /**
      * MOJO Execution
-     *
-     * @throws MojoExecutionException
      */
     public void execute() throws MojoExecutionException {
 
@@ -77,11 +76,9 @@ public class MyMojo extends AbstractMojo {
     }
 
     /**
-     * Read and and reformat XML file
+     * Read and reformat XML file
      *
      * @return Document
-     * @throws IOException
-     * @throws ParserConfigurationException
      */
     private Document readAndReformatXml(Path path) throws IOException, ParserConfigurationException, SAXException {
         Charset charset = StandardCharsets.UTF_8;
@@ -124,8 +121,6 @@ public class MyMojo extends AbstractMojo {
 
     /**
      * Permet d'afficher les informations du Node
-     *
-     * @param node
      */
     private void logNodeInformation(Node node) {
         NamedNodeMap attributes = node.getAttributes();
